@@ -226,8 +226,8 @@ class Worker:
         # pylint: disable=W0613
         self.status = status_data['status']
         printed_status_data = status_data.copy()
-        if self.kwargs['suppress_env_print']:
-            suppressed_env = {}
+        if 'suppress_env_print' in self.kwargs and self.kwargs['suppress_env_print']:
+            suppressed_env = dict()
             suppressed_env['SUPPRESS_ENV_PRINT'] = self.kwargs['suppress_env_print']
             printed_status_data['env'] = suppressed_env
         self._output.write(json.dumps(printed_status_data).encode('utf-8'))
