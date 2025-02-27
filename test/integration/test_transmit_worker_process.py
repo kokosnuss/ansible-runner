@@ -518,19 +518,21 @@ def test_unparsable_really_big_line_processor(tmp_path):
         status_handler=status_receiver
     )
 
+
 @pytest.mark.parametrize("suppress", [True, False])
 def test_suppress_env_print(tmp_path, suppress):
     worker_dir = tmp_path / 'for_worker'
     worker_dir.mkdir()
     incoming_buffer = io.BytesIO(
-        b'{"kwargs": {"playbook": "debug.yml", "suppress_env_print": true}}\n{"eof": true}\n' if suppress else b'{"kwargs": {"playbook": "debug.yml", "suppress_env_print": false}}\n{"eof": true}\n')
+        b'{"kwargs": {"playbook": "debug.yml", "suppress_env_print": true}}\n{"eof": true}\n' if suppress
+        else b'{"kwargs": {"playbook": "debug.yml", "suppress_env_print": false}}\n{"eof": true}\n')
     outgoing_buffer = io.BytesIO()
 
     for buffer in (outgoing_buffer, incoming_buffer):
         buffer.name = 'foo'
 
     # Worker
-    worker = run(
+    run(
         streamer='worker',
         _input=incoming_buffer,
         _output=outgoing_buffer,
