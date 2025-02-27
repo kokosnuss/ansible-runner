@@ -630,6 +630,13 @@ def main(sys_args=None):
         help="show the execution node's Ansible Runner version along with its memory and CPU capacities"
     )
     worker_subparser.add_argument(
+        "--suppress-env-print",
+        dest="suppress_env_print",
+        action="store_true",
+        default=DEFAULT_RUNNER_SUPPRESS_ENV_PRINT,
+        help="add flag to prevent the printing of env vars on stdout. Also set via SUPPRESS_ENV_PRINT"
+    )
+    worker_subparser.add_argument(
         "--delete",
         dest="delete_directory",
         action="store_true",
