@@ -524,7 +524,8 @@ def test_mask_secrets_in_env(tmp_path, mask):
     worker_dir = tmp_path / 'for_worker'
     worker_dir.mkdir()
     incoming_buffer = io.BytesIO(
-        b'{"kwargs": {"playbook": "debug.yml", "mask_secrets_in_env": true}}\n{"eof": true}\n' if mask else b'{"kwargs": {"playbook": "debug.yml", "mask_secrets_in_env": false}}\n{"eof": true}\n')
+        b'{"kwargs": {"playbook": "debug.yml", "mask_secrets_in_env": true}}\n{"eof": true}\n'
+        if mask else b'{"kwargs": {"playbook": "debug.yml", "mask_secrets_in_env": false}}\n{"eof": true}\n')
     outgoing_buffer = io.BytesIO()
 
     for buffer in (outgoing_buffer, incoming_buffer):
