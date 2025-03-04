@@ -518,6 +518,7 @@ def test_unparsable_really_big_line_processor(tmp_path):
         status_handler=status_receiver
     )
 
+
 @pytest.mark.parametrize("suppress", [True, False])
 def test_suppress_env_print(tmp_path, suppress):
     worker_dir = tmp_path / 'for_worker'

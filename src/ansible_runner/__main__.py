@@ -56,7 +56,6 @@ DEFAULT_RUNNER_BINARY = os.getenv('RUNNER_BINARY', None)
 DEFAULT_RUNNER_PLAYBOOK = os.getenv('RUNNER_PLAYBOOK', None)
 DEFAULT_RUNNER_ROLE = os.getenv('RUNNER_ROLE', None)
 DEFAULT_RUNNER_MODULE = os.getenv('RUNNER_MODULE', None)
-DEFAULT_RUNNER_SUPPRESS_ENV_PRINT = os.getenv('SUPPRESS_ENV_PRINT', None)
 DEFAULT_UUID = uuid4()
 
 DEFAULT_CLI_ARGS = {
@@ -633,7 +632,6 @@ def main(sys_args=None):
         "--suppress-env-print",
         dest="suppress_env_print",
         action="store_true",
-        default=DEFAULT_RUNNER_SUPPRESS_ENV_PRINT,
         help="add flag to prevent the printing of env vars on stdout. Also set via SUPPRESS_ENV_PRINT"
     )
     worker_subparser.add_argument(
