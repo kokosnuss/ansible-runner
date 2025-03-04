@@ -226,7 +226,7 @@ class Worker:
         # pylint: disable=W0613
         self.status = status_data['status']
         printed_status_data = status_data.copy()
-        if 'suppress_env_print' in self.kwargs and self.kwargs['suppress_env_print']:
+        if 'mask_secrets_in_env' in self.kwargs and self.kwargs['mask_secrets_in_env']:
             printed_status_data['env'] = build_safe_env(status_data['env']) if 'env' in status_data else {}
         self._output.write(json.dumps(printed_status_data).encode('utf-8'))
         self._output.write(b'\n')
