@@ -530,14 +530,14 @@ def test_suppress_env_print(tmp_path, suppress):
         buffer.name = 'foo'
 
     # Worker
-    worker = run(
+    run(
         streamer='worker',
         _input=incoming_buffer,
         _output=outgoing_buffer,
         private_data_dir=worker_dir,
-        envvars={"SUPPRESS_ENV_PRINT": "False"}
+        envvars={"TEST_PASSWORD": "SUPERSECRETPASSWORD"}
     )
     outgoing_buffer.seek(0)
     sent = outgoing_buffer.readline()
     data = json.loads(sent)
-    assert data["env"]["SUPPRESS_ENV_PRINT"] == str(suppress)
+    assert data["env"]["TEST_PASSWORD"] == ('**********' if suppress else "SUPERSECRETPASSWORD")
